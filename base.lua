@@ -1870,6 +1870,31 @@ imgui.OnInitialize(function()
     colors[imgui.Col.HeaderHovered]     = imgui.ImVec4(0.00, 0.55, 0.80, 1.00)
     colors[imgui.Col.HeaderActive]      = imgui.ImVec4(0.00, 0.60, 0.85, 1.00)
 
+    -- Separadores
+    colors[imgui.Col.Separator]         = imgui.ImVec4(0.20, 0.25, 0.30, 1.00)
+    colors[imgui.Col.SeparatorHovered]  = imgui.ImVec4(0.30, 0.45, 0.60, 1.00)
+    colors[imgui.Col.SeparatorActive]   = imgui.ImVec4(0.40, 0.60, 0.80, 1.00)
+
+    -- Estilo arredondado e moderno
+    style.WindowRounding = 12.0
+    style.FrameRounding = 8.0
+    style.GrabRounding = 6.0
+    style.ScrollbarRounding = 8.0
+    style.ChildRounding = 10.0
+end)
+
+local ip, port = sampGetCurrentServerAddress()
+local SERVERNAME = sampGetCurrentServerName() or "DESCONHECIDO"
+
+imgui.OnFrame(function()
+    return window[0]
+end, function()
+    -- Dimensões ideais
+    local menuWidth = 600 * MDS
+    local menuHeight = 420 * MDS
+    local sidebarWidth = 160 * MDS
+
+
     -- Barras e sliders
     colors[imgui.Col.FrameBg]           = imgui.ImVec4(0.12, 0.14, 0.18, 1.00)
     colors[imgui.Col.FrameBgHovered]    = imgui.ImVec4(0.20, 0.25, 0.35, 1.00)
@@ -1903,20 +1928,6 @@ end, function()
 
     imgui.SetNextWindowSize(imgui.ImVec2(menuWidth, menuHeight), imgui.Cond.FirstUseEver)
     imgui.Begin("##JJMENU", window, imgui.WindowFlags.NoTitleBar + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-
-    -- ⛳ Cabeçalho (Servidor, versão e autor)
-    imgui.PushStyleColor(imgui.Col.Text, imgui.ImVec4(1, 1, 1, 1))
-    imgui.Text("CONECTADO NA CIDADE: " .. SERVERNAME .. "")
-    imgui.SameLine()
-    imgui.Text(" | VERSÃO: V1.0")
-    imgui.PopStyleColor()
-
-    imgui.SameLine()
-    imgui.Text(" | BY JUCA")
-    
-
-    imgui.Separator()
-
     -- 🎯 Título centralizado + botão Fechar (X)
     local title = "JJ MENU"
     local titleSize = imgui.CalcTextSize(title)
